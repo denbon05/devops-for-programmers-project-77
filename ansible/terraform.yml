@@ -1,0 +1,47 @@
+---
+- name: Setup infrastructure
+  hosts: local
+  tasks:
+    # - name: Add backend config file
+    #   ansible.builtin.template:
+    #     src: backend.j2
+    #     dest: '{{ backend_conf_path }}'
+    #     mode: '0644'
+
+    - name: Add secrets.auto.tfvars
+      ansible.builtin.template:
+        src: secrets.auto.tfvars.j2
+        dest: '{{ terraform_dir }}/secrets.auto.tfvars'
+        mode: '0644'
+      changed_when: infra_state == 'present'
+
+    - name: Apply terraform infrastructure (webservers, loadbalancer)
+      community.general.terraform:
+        project_path: '{{ terraform_dir }}'
+        # backend_config_files:
+        #   - '{{ backend_conf_path }}'
+        force_init: true
+        purge_workspace: false
+        # workspace: 'hexlet77'
+        lock: false
+        # init_reconfigure: true
+        state: '{{ infra_state }}'
+      register: infra
+
+    # - name: Show infra # TODO: remove
+    #   ansible.builtin.debug:
+    #     var: infra
+
+    - name: Add hosts
+      ansible.builtin.template:
+        src: hosts.j2
+        dest: hosts.ini
+        mode: '0644'
+      changed_when: infra_state == 'present'
+
+    # - name: Generate ssh_config
+    #   ansible.builtin.template:
+    #     src: templates/ssh_config.j2
+    #     dest: '{{ deploy_environment }}/ssh_config'
+    #     mode: '0644'
+    #   when: infra_state == "present"

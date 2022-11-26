@@ -1,0 +1,2 @@
+infra_state: "present"
+terraform_dir: "{{ playbook_dir }}/../terraform"
