@@ -1,0 +1,13 @@
+---
+- name: Deploy app
+  hosts: webservers
+  tasks:
+    - name: Manage docker app
+      community.docker.docker_container:
+        name: '{{ container_name }}'
+        image: '{{ image_with_tag }}'
+        restart_policy: always
+        state: '{{ container_state }}'
+        ports:
+          - '{{ app_port }}:{{ app_port }}'
+        env_file: /.env

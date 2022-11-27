@@ -3,7 +3,7 @@ resource "digitalocean_database_cluster" "postgres-hexlet77" {
   engine     = "pg"
   version    = "13"
   size       = "db-s-1vcpu-1gb"
-  region     = "ams2"
+  region     = var.region
   node_count = 1
 }
 

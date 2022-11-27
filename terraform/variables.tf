@@ -3,6 +3,13 @@ variable "do_token" {
   sensitive = true
 }
 
-variable "pvt_key" {}
+variable "pvt_key" {
+  type      = string
+  sensitive = true
+}
 
-# variable "backend_token" {}
+variable "region" {}
+
+variable "app_port" {}
+
+variable "domain_name" {}

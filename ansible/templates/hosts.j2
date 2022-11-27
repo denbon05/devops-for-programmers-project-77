@@ -3,5 +3,5 @@ localhost ansible_connection=local
 
 [webservers]
 {% for ipv4 in infra.outputs.server_ips.value %}
-  server{{loop.index}} {{ ipv4 }} ansible_user=root
+server{{loop.index}} ansible_host={{ipv4}} ansible_user=root
 {% endfor %}

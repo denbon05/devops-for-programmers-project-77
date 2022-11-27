@@ -1,0 +1,11 @@
+---
+- name: Prepare environment on servers
+  hosts: webservers
+  roles:
+    - role: geerlingguy.docker
+  tasks:
+    - name: Create env file
+      ansible.builtin.copy:
+        src: files/.env
+        dest: /.env
+        mode: '0644'

@@ -1,0 +1,9 @@
+---
+- name: Import terraform playbook
+  ansible.builtin.import_playbook: terraform.yml
+
+- name: Import setup_servers playbook
+  ansible.builtin.import_playbook: setup_servers.yml
+
+- name: Import deploy playbook
+  ansible.builtin.import_playbook: deploy.yml
