@@ -18,10 +18,6 @@
         state: '{{ infra_state }}'
       register: infra
 
-    # - name: Show infra # TODO: remove
-    #   ansible.builtin.debug:
-    #     var: infra
-
     - name: Add hosts
       ansible.builtin.template:
         src: hosts.j2
@@ -34,10 +30,3 @@
         src: env.j2
         dest: files/.env
         mode: '0644'
-
-    # - name: Generate ssh_config
-    #   ansible.builtin.template:
-    #     src: templates/ssh_config.j2
-    #     dest: '{{ deploy_environment }}/ssh_config'
-    #     mode: '0644'
-    #   when: infra_state == "present"

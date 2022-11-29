@@ -45,5 +45,8 @@ make deploy-app
 ```
 
 <p>
-  The app will be available on <a href="https://hexlet.club">hexlet.club</a>
+  The app will be available on 
+  <a href="https://hexlet.club" target="_blank">
+    hexlet.club
+  </a>
 </p>

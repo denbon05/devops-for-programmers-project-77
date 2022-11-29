@@ -1,8 +1,12 @@
 ---
 - name: Prepare environment on servers
   hosts: webservers
+
   roles:
     - role: geerlingguy.docker
+    - role: datadog.datadog
+      become: true
+
   tasks:
     - name: Create env file
       ansible.builtin.copy:

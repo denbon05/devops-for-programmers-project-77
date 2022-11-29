@@ -1,5 +1,6 @@
 infra_state: "present"
 terraform_dir: "{{ playbook_dir }}/../terraform"
+pvt_key_path: "~/.ssh/id_rsa"
 
 infra_region: "ams3"
 domain_name: hexlet.club
