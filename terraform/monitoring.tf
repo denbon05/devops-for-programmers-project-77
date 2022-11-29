@@ -32,3 +32,27 @@ resource "datadog_monitor" "healthy-servers" {
   include_tags = true
   tags         = ["datadog", "monitoring"]
 }
+
+resource "datadog_monitor" "available-servers" {
+  name    = "Server doesn't respond"
+  type    = "service check"
+  query   = "\"datadog.agent.up\".over(\"*\").by(\"host\").last(2).count_by_status()"
+  message = "Host {{host.name}} with IP {{host.ip}} is down."
+  tags = [
+    "datadog",
+    "unreachable"
+  ]
+  monitor_thresholds {
+    critical = 1
+    warning  = 1
+    ok       = 1
+  }
+  notify_audit      = false
+  notify_no_data    = true
+  no_data_timeframe = 2
+  renotify_interval = 0
+  timeout_h         = 0
+  include_tags      = true
+  new_group_delay   = 60
+  priority          = 2
+}
